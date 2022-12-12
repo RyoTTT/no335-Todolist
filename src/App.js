@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <>
+<>
 <div className="submit">
   <input type="text" placeholder='todoを入力'></input>
   <button>追加</button>
