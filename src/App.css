@@ -23,9 +23,7 @@ p {
   background-color: cornflowerblue;
   border-radius: 10px;
 }
-ul {
-  display: flex;
-}
+
 button {
   margin-left:10px;
 }
@@ -42,4 +40,12 @@ li {
   width:500px;
   background-color:cornflowerblue;
   border-radius: 10px;
+}
+.contents {
+  display: flex;
+  margin-bottom:5px;
+}
+#active {
+  background-color: crimson;
+  color: gold;
 }
