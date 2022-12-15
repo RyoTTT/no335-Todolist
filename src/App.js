@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 import { useState } from 'react';
+import Todolist from './Todolist'
+import AddTodo from './Addtodo';
+import EditTodo from './Edittodo';
+import CompleteTodo from './CompleteTodo';
 
 
 function App() {
@@ -89,18 +93,19 @@ function App() {
  return (
 <>
 {editing ? (
-  <div className="submit">
-  <form onSubmit={editSubmit}>
-  <input name="edit" type="text" value={editTodo.text} onChange={geteditTodo}></input>
-  <button type="submit">完了</button>
-  <button onClick={()=>setediting(false)}>元に戻す</button>
-  </form>
-</div> 
+          <div className="submit">
+          <form onSubmit={editSubmit}>
+          <input name="edit" type="text" value={editTodo.text} onChange={geteditTodo}></input>
+          <button type="submit">完了</button>
+          <button onClick={()=>setediting(false)}>元に戻す</button>
+          </form>
+        </div> 
 ) : (
-<div className="submit">
-  <input name="todo" type="text"  value={todoText} placeholder='todoを入力' onChange={getText}></input>
-  <button onClick={submitTodo}>追加</button>
-</div>
+  <AddTodo
+  todoText={todoText}
+  ongetText={getText}
+  onsubmitTodo={submitTodo}>
+  </AddTodo>
 )}
 <p>「TODO」</p>
 <div className='todolist'>
@@ -119,19 +124,10 @@ function App() {
   </ul>
 </div>
 <p>「完了済TODO」</p>
-<div className="compTodo">
-  <ul>
-    {compTodos.map((todo,num)=>{
-      return (
-        <div key="compTodolist" className="contents">
-        <li>{num+1}:{todo}</li>
-        <button onClick={()=>backTodos(num)}>戻す</button>
-        </div>
-      )
-    })
-  }
-  </ul>
-</div>
+<CompleteTodo
+compTodos={compTodos}
+onbackTodos={backTodos}>
+</CompleteTodo>
 </>
   );
 }
