@@ -22,7 +22,11 @@ function App() {
   }
 //文字をセット
   const submitTodo = () => {
-      const newTodos = [...todos, todoText];
+      const newTodo = {
+        id: todos.length,
+        text: todoText
+      }
+      const newTodos = [...todos, newTodo];
       setTodos(newTodos);
       settodoText("");
     }
@@ -36,6 +40,8 @@ function App() {
   
 //完了の欄に移動させる
   const todoComp = (num) => {
+    const newStartTodoIdList = startTodoIdList.filter(todoId => num !== todoId);
+    setStartTodoIdList(newStartTodoIdList);
     const spliceTodos = [...todos];
     spliceTodos.splice(num,1);
     
@@ -86,8 +92,9 @@ function App() {
   }
   
 //開始ボタンでそのTodoのcssを変更する
-  const todoDoing = () => {
-    setactive(!active);
+  const [startTodoIdList, setStartTodoIdList] = useState([])
+  const todoDoing = (id) => {
+    setStartTodoIdList([...startTodoIdList, id])
   }
   
  return (
@@ -112,11 +119,11 @@ function App() {
   <ul>
     {todos.map((todo,num)=>{
       return (
-        <div key={num} className="contents" id={ active ? "active" : "" }>
-          <li>{num+1}:{todo}</li>
+        <div key={num} className="contents" id={ startTodoIdList.includes(todo.id) ? "active" : "" }>
+          <li>{todo.id}:{todo.text}</li>
           <button onClick={()=>todoComp(num)}>完了</button>
           <button onClick={()=>todoDelete(num)}>削除</button>
-          <button onClick={todoDoing}>開始</button>
+          <button onClick={() => todoDoing(todo.id)}>開始</button>
           <button onClick={()=>todoEdit(todo,num)}>編集</button>
         </div>
       )

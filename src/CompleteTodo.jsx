@@ -9,7 +9,7 @@ export default function CompleteTodo({
     {compTodos.map((todo,num)=>{
       return (
         <div key="compTodolist" className="contents">
-        <li>{num+1}:{todo}</li>
+        <li>{todo.id}:{todo.text}</li>
         <button onClick={()=>onbackTodos(num)}>戻す</button>
         </div>
       )
